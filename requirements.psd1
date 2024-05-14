@@ -11,4 +11,14 @@
     'PSTerraformLike' = '1.0.1.20231210'
     'NTObjectManager' = '2.0.1'
     'PowerShellNotebook' = '3.0.0'
+
+    # Clone a git repo
+    'https://github.com/kgkzworld/PSPortable_7.3.0' = 'master'
+    'https://github.com/kgkzworld/PyPortable_3.10.11' = 'master'
+
+    # Download a file
+    #'psrabbitmq.dll' = @{
+    #    DependencyType = 'FileDownload'
+    #    Source = 'https://github.com/RamblingCookieMonster/PSRabbitMq/raw/master/PSRabbitMq/lib/RabbitMQ.Client.dll'
+    #}
 }

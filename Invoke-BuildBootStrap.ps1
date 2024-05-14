@@ -147,7 +147,7 @@
         [Latest Author]
             o Michael Arroyo
         [Latest Build Version]
-            o 1.1.0.20240506 (Major.Minor.Patch.Date<YYYYMMDD>)
+            o 1.1.1.20240513 (Major.Minor.Patch.Date<YYYYMMDD>)
         [Comments]
             o
         [PowerShell Compatibility / Tested On]
@@ -176,6 +176,9 @@
                 [Michael Arroyo] Added the PyRequirements Parameter
                 [Michael Arroyo] Updated the Help Information
                 [Michael Arroyo] Added a default python requirement file
+            o 1.1.1.20240513 -
+                [Michael Arroyo] Add dynamic query path for the Python interpreter in the dependencies folder
+                [Michael Arroyo] Add dynamic query path for the PowerShell Core interpreter in the dependencies folder
     #>
 #endregion Build Notes
 
@@ -284,7 +287,9 @@
         task UpdateEnv {
             Switch ( $Null ) {
                 { $EnablePython } {
-                    $PythonPath = $('{0}\PyPortable\python-3.12.3.amd64' -f $CurModulePath)
+                    $PythonPath = Get-ChildItem -Path $CurModulePath -Filter 'python.exe' -File -Recurse |
+                        Where-Object -Property Fullname -notmatch 'venv\\scripts\\nt' | Select-Object -ExpandProperty Fullname |
+                        Split-Path -Parent
                     $PyScriptsPath = $('{0}\Scripts' -f $PythonPath)
 
                     if ( $env:Path -notmatch 'PyPortable' ) {
@@ -303,7 +308,8 @@
                 }
 
                 { $EnablePWSH } {
-                    $PWSHPath = $('{0}\PSPortable' -f $CurModulePath)
+                    $PWSHPath = Get-ChildItem -Path $CurModulePath -Filter 'pwsh.exe' -File -Recurse |
+                        Select-Object -ExpandProperty Fullname | Split-Path -Parent
 
                     if ( $env:Path -notmatch 'PSPortable' ) {
                         $env:Path = $('{0};{1}' -f $PWSHPath, $env:Path)
