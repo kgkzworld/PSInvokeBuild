@@ -13,8 +13,8 @@
     'PowerShellNotebook' = '3.0.0'
 
     # Clone a git repo
-    'https://github.com/kgkzworld/PSPortable_7.3.0' = 'master'
-    'https://github.com/kgkzworld/PyPortable_3.10.11' = 'master'
+    'https://github.com/kgkzworld/PSPortable_7.3.0' = 'main'
+    'https://github.com/kgkzworld/PyPortable_3.10.11' = 'main'
 
     # Download a file
     #'psrabbitmq.dll' = @{
